@@ -1,0 +1,200 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover, &.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: white;
+    
+    h3, p {
+      color: white;
+    }
+  }
+}
+
+.dropzoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  
+  h3 {
+    margin: 0;
+    color: var(--color-text);
+    transition: color 0.3s ease;
+  }
+  
+  p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+  }
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+}
+
+.fileName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+}
+
+.removeFile {
+  background: none;
+  border: none;
+  color: var(--color-error);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.2rem;
+  
+  &:hover {
+    color: var(--color-error-dark);
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--color-text-secondary);
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  span {
+    padding: 0 1rem;
+  }
+}
+
+.textInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.textarea {
+  @include input-base;
+  resize: vertical;
+  min-height: 150px;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.exampleButton {
+  @include button-secondary;
+  flex: 1;
+}
+
+.submitButton {
+  @include button-primary;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-error-light);
+  border: 1px solid var(--color-error);
+  border-radius: var(--border-radius);
+  color: var(--color-error-dark);
+  
+  strong {
+    font-weight: 600;
+  }
+}
