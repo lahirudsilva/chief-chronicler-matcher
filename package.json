@@ -1,0 +1,25 @@
+{
+  "name": "chief-chronicler-matcher",
+  "version": "1.0.0",
+  "description": "Location matching application for finding the Chief Chronicler",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean"
+  },
+  "keywords": [
+    "location",
+    "matching",
+    "algorithm",
+    "turbo",
+    "trpc"
+  ],
+  "author": "Lahiru de silva",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^1.13.4",
+    "typescript": "^5.8.3"
+  }
+}
