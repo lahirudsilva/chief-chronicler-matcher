@@ -1,0 +1,96 @@
+// Color Palette - Chief Chronicler Theme
+$primary-color: #2c5530;      // Deep forest green
+$primary-light: #4a7c59;      // Lighter forest green
+$primary-dark: #1a3d1f;       // Darker forest green
+
+$secondary-color: #8b4513;    // Saddle brown (earthy)
+$secondary-light: #cd853f;    // Sandy brown
+$secondary-dark: #5d2f09;     // Dark brown
+
+$accent-color: #daa520;       // Goldenrod (treasure/chronicle theme)
+$accent-light: #f4d03f;       // Light gold
+$accent-dark: #b8860b;        // Dark goldenrod
+
+// Status Colors
+$success-color: #27ae60;      // Success green
+$error-color: #e74c3c;        // Error red
+$warning-color: #f39c12;      // Warning orange
+$info-color: #3498db;         // Info blue
+
+// Neutral Colors
+$white: #ffffff;
+$light-gray: #f8f9fa;
+$gray: #6c757d;
+$dark-gray: #343a40;
+$black: #000000;
+
+// Background Colors
+$bg-primary: #f5f7fa;         // Light blue-gray
+$bg-secondary: #e8f5e8;       // Very light green
+$bg-dark: #2c3e50;            // Dark blue-gray
+
+// Typography
+$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-heading: 'Playfair Display', serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+// Font Sizes (Modular Scale - 1.25 ratio)
+$font-size-xs: 0.75rem;      // 12px
+$font-size-sm: 0.875rem;     // 14px
+$font-size-base: 1rem;       // 16px
+$font-size-lg: 1.125rem;     // 18px
+$font-size-xl: 1.25rem;      // 20px
+$font-size-2xl: 1.5rem;      // 24px
+$font-size-3xl: 1.875rem;    // 30px
+$font-size-4xl: 2.25rem;     // 36px
+$font-size-5xl: 3rem;        // 48px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing (8px grid system)
+$spacing-xs: 0.25rem;        // 4px
+$spacing-sm: 0.5rem;         // 8px
+$spacing-md: 1rem;           // 16px
+$spacing-lg: 1.5rem;         // 24px
+$spacing-xl: 2rem;           // 32px
+$spacing-2xl: 3rem;          // 48px
+$spacing-3xl: 4rem;          // 64px
+$spacing-4xl: 6rem;          // 96px
+
+// Border Radius
+$border-radius-sm: 0.25rem;   // 4px
+$border-radius-md: 0.5rem;    // 8px
+$border-radius-lg: 0.75rem;   // 12px
+$border-radius-xl: 1rem;      // 16px
+$border-radius-full: 9999px;  // Fully rounded
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Z-index
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// Transitions
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.2s ease-in-out;$transition-slow: 0.3s ease-in-out;
