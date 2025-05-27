@@ -7,6 +7,7 @@ const nextConfig = {
   // Enable SCSS support
   sassOptions: {
     includePaths: ['./src/styles'],
+    prependData: `@import "variables"; @import "mixins";`,
   },
   
   // API proxy for development

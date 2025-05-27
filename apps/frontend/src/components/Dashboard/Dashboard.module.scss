@@ -1,0 +1,247 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  border-radius: var(--border-radius-lg);
+  color: var(--color-accent-light);
+  border: 2px solid var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: var(--font-family-heading);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--color-accent-light);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0;
+  font-style: italic;
+  color: var(--color-accent-light);
+}
+
+.summary {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 2fr;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.primaryMetric {
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--color-primary-light);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.metricValue {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-family-heading);
+}
+
+.metricLabel {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  font-family: var(--font-family-heading);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.statCard {
+  background: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: var(--color-primary-light);
+    color: green;
+  }
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-family-heading);
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.detailsSection {
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.detailsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
+  color: var(--color-accent-light);
+}
+
+.detailsTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-heading);
+}
+
+.tableContainer {
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid var(--color-border);
+  
+  th {
+    background: var(--color-primary-light);
+    color: black;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    font-family: var(--font-family-heading);
+    border-bottom: 2px solid var(--color-primary);
+  }
+  
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: 0.9rem;
+  }
+}
+
+.tableRow {
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background: var(--color-primary-light);
+    color: black;
+  }
+  
+  &:last-child td {
+    border-bottom: none;
+  }
+}
+
+.indexCell {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-align: center;
+  width: 80px;
+}
+
+.locationCell {
+  font-family: var(--font-family-mono);
+  font-weight: 500;
+  text-align: center;
+  width: 120px;
+}
+
+.distanceCell {
+  font-weight: 600;
+  text-align: center;
+  width: 100px;
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.resetButton {
+  @include button-primary;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-family: var(--font-family-heading);
+  border: 2px solid var(--color-accent);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.showMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.showMoreButton {
+  @include button-secondary;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  border-radius: var(--border-radius-full);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+}
