@@ -2,10 +2,11 @@
   "name": "chief-chronicler-matcher",
   "version": "1.0.0",
   "description": "Location matching application for finding the Chief Chronicler",
+   "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "clean": "turbo run clean"
   },
@@ -19,7 +20,8 @@
   "author": "Lahiru de silva",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "^1.13.4",
+    "turbo": "^2.5.3",
     "typescript": "^5.8.3"
-  }
+  },
+  "packageManager": "npm@9.8.0"
 }
