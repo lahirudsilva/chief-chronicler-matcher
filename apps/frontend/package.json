@@ -1,0 +1,32 @@
+{
+  "name": "@chronicler/frontend",
+  "version": "0.0.0",
+  "description": "Frontend for Chief Chronicler location matching",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chronicler/types": "*",
+    "@trpc/client": "^10.44.1",
+    "@trpc/next": "^10.44.1",
+    "@trpc/react-query": "^10.44.1",
+    "@trpc/server": "^10.44.1",
+    "@tanstack/react-query": "^4.36.1",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.69.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.7",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "^5.0.0"
+  }
+}
