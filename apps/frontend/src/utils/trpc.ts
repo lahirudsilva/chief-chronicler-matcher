@@ -3,9 +3,17 @@ import { httpBatchLink } from '@trpc/client';
 import type { AppRouter } from '../../../backend/src/router';
 
 function getBaseUrl() {
-  if (typeof window !== 'undefined') return ''; // browser should use relative url
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
-  return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
+  // In production, always use the deployed backend
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://chief-chronicler-matcher-backend.vercel.app';
+  }
+  
+  // In development, use local backend
+  if (typeof window !== 'undefined') {
+    return 'http://localhost:3001'; // browser should use local backend
+  }
+  
+  return 'http://localhost:3001'; // dev SSR should use local backend
 }
 
 export const trpc = createTRPCNext<AppRouter>({

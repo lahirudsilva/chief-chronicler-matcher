@@ -7,10 +7,15 @@ import { verifyWithExample } from './services/locationMatcher';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Enable CORS middleware
+// Enable CORS middleware with specific origins
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
+  origin: [
+    'http://localhost:3000', // Local development
+    'https://chief-chronicler-matcher-frontend.vercel.app', // Production frontend
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // Add JSON parsing middleware
