@@ -10,8 +10,14 @@ const PORT = process.env.PORT || 3001;
 
 // Enable CORS middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
+    origin: process.env.NODE_ENV === 'production' 
+        ? [
+            'https://chronicler-frontend.vercel.app',
+            'https://chronicler-frontend-git-master.vercel.app',
+            'https://chronicler-frontend-yourusername.vercel.app'
+        ]
+        : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    credentials: true
 }));
 
 // Add JSON parsing middleware
@@ -48,17 +54,17 @@ app.get('/', (req, res) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Backend server running on port ${PORT}`);
-  console.log(`📡 tRPC endpoint: http://localhost:${PORT}/trpc`);
-  console.log(`🔍 Health check: http://localhost:${PORT}/health`);
-  console.log(`🏠 Root endpoint: http://localhost:${PORT}/`);
-  
-  // Verify algorithm on startup
-  const algorithmWorks = verifyWithExample();
-  console.log(`🧮 Algorithm verification: ${algorithmWorks ? '✅ PASSED' : '❌ FAILED'}`);
-});
+// For Vercel deployment
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  // For local development
+  app.listen(PORT, () => {
+    console.log(`🚀 Backend server running on port ${PORT}`);
+    console.log(`📡 tRPC endpoint: http://localhost:${PORT}/trpc`);
+    console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+  });
+}
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

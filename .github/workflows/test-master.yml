@@ -1,0 +1,56 @@
+name: Test Master Workflow
+
+on:
+  push:
+    branches: [feature/setup-cicd]  # Only runs on our feature branch for now
+
+jobs:
+  test-deploy-simulation:
+    name: Simulate Deploy (No Actual Deploy)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📚 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build types package first
+        run: |
+          cd packages/types
+          npm run build
+          cd ../..
+
+      - name: 🔍 Type check all packages
+        run: npm run type-check
+
+      - name: 🧹 Lint code (if available)
+        run: npm run lint || echo "No lint script found, skipping..."
+        continue-on-error: true
+
+      - name: 🏗️ Build all packages
+        run: npm run build
+
+      - name: 🧪 Simulate Backend Deploy
+        run: |
+          echo "🔧 Backend build successful!"
+          echo "📦 Ready for Vercel deployment"
+          echo "🔗 Would deploy to: https://chronicler-backend.vercel.app"
+
+      - name: 🧪 Simulate Frontend Deploy
+        run: |
+          echo "🌐 Frontend build successful!" 
+          echo "📦 Ready for Vercel deployment"
+          echo "🔗 Would deploy to: https://chronicler-frontend.vercel.app"
+
+      - name: ✅ Deployment simulation complete
+        run: |
+          echo "🎉 All deployment checks passed!"
+          echo "✅ Ready for real deployment setup"

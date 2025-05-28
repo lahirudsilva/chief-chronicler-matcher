@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "buildCommand": "npm run vercel-build",
+  "devCommand": "npm run dev", 
+  "installCommand": "npm install",
+  "functions": {
+    "dist/server.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/trpc/(.*)",
+      "dest": "/dist/server.js"
+    },
+    {
+      "src": "/health",
+      "dest": "/dist/server.js"  
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
