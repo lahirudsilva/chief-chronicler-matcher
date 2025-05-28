@@ -4,6 +4,7 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 import { appRouter } from './router';
 import { verifyWithExample } from './services/locationMatcher';
 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
