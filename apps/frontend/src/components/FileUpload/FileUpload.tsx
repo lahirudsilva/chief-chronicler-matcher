@@ -105,8 +105,20 @@ const FileUpload: React.FC<FileUploadProps> = ({ onResults, onStartProcessing })
     }
   };
 
-  const handleDropzoneClick = () => {
-    fileInputRef.current?.click();
+  // Fixed: Prevent event propagation and ensure file input is triggered
+  const handleDropzoneClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Small delay to ensure any pending events are processed
+    setTimeout(() => {
+      fileInputRef.current?.click();
+    }, 10);
+  };
+
+  // Prevent the dropzone from interfering with file input clicks
+  const handleFileInputClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
   };
 
   return (
@@ -126,20 +138,32 @@ const FileUpload: React.FC<FileUploadProps> = ({ onResults, onStartProcessing })
           onDragOver={handleDrag}
           onDrop={handleDrop}
           onClick={handleDropzoneClick}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleDropzoneClick(e as any);
+            }
+          }}
         >
           <div className={styles.dropzoneContent}>
             <div className={styles.icon}>📁</div>
             <h3>Drop your file here</h3>
             <p>or click to browse for a .txt file</p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".txt"
-              onChange={handleFileInput}
-              className={styles.fileInput}
-            />
           </div>
         </div>
+
+        {/* Hidden file input positioned outside the dropzone */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".txt"
+          onChange={handleFileInput}
+          onClick={handleFileInputClick}
+          className={styles.fileInput}
+          style={{ display: 'none' }}
+        />
 
         {fileName && (
           <div className={styles.fileInfo}>
