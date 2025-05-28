@@ -70,8 +70,19 @@ export function calculateStatistics(pairs: LocationPair[]) {
  * Combines all pure functions to solve the problem
  */
 export function processLocationData(inputData: string): ProcessingResult {
+  // Validate input first and throw if invalid
+  const validation = validateInput(inputData);
+  if (!validation.isValid) {
+    throw new Error(validation.error || "Invalid input data");
+  }
+  
   // Step 1: Parse input into two lists
   const locationLists = parseLocationInput(inputData);
+  
+  // Additional check: ensure we have pairs after parsing
+  if (locationLists.list1.length === 0 || locationLists.list2.length === 0) {
+    throw new Error("No valid location pairs found after parsing");
+  }
   
   // Step 2: Create pairs by sorting and matching
   const pairs = createLocationPairs(locationLists);
@@ -85,9 +96,7 @@ export function processLocationData(inputData: string): ProcessingResult {
     pairsCount: pairs.length,
     pairs: pairs,
     statistics: {
-      average: stats.average,
-      maximum: stats.maximum,
-      minimum: stats.minimum
+      average: stats.average
     }
   };
 }

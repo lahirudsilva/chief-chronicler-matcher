@@ -39,3 +39,12 @@ coverage/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+junit.xml
+
+# Jest
+jest-results.json
