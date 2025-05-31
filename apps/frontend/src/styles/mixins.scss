@@ -1,36 +1,5 @@
 @import './variables';
 
-// Responsive breakpoints
-@mixin mobile {
-  @media (max-width: $breakpoint-md) { @content; }
-}
-
-@mixin tablet {
-  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) { @content; }
-}
-
-@mixin desktop {
-  @media (min-width: $breakpoint-lg) { @content; }
-}
-
-@mixin respond-to($breakpoint) {
-  @if $breakpoint == sm {
-    @media (min-width: $breakpoint-sm) { @content; }
-  }
-  @if $breakpoint == md {
-    @media (min-width: $breakpoint-md) { @content; }
-  }
-  @if $breakpoint == lg {
-    @media (min-width: $breakpoint-lg) { @content; }
-  }
-  @if $breakpoint == xl {
-    @media (min-width: $breakpoint-xl) { @content; }
-  }
-  @if $breakpoint == 2xl {
-    @media (min-width: $breakpoint-2xl) { @content; }
-  }
-}
-
 // Button styles
 @mixin button-base {
   display: inline-flex;
@@ -96,27 +65,6 @@
   }
 }
 
-// Card styles
-@mixin card {
-  background: $white;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
-  padding: $spacing-lg;
-  transition: all $transition-base;
-  
-  &:hover {
-    box-shadow: $shadow-lg;
-    transform: translateY(-2px);
-  }
-}
-
-@mixin card-flat {
-  background: $white;
-  border-radius: $border-radius-md;
-  border: 1px solid rgba($gray, 0.2);
-  padding: $spacing-md;
-}
-
 // Input styles
 @mixin input-base {
   width: 100%;
@@ -141,6 +89,27 @@
     background-color: $light-gray;
     cursor: not-allowed;
   }
+}
+
+// Card styles
+@mixin card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  transition: all $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin card-flat {
+  background: $white;
+  border-radius: $border-radius-md;
+  border: 1px solid rgba($gray, 0.2);
+  padding: $spacing-md;
 }
 
 // Layout helpers
@@ -171,6 +140,21 @@
   justify-content: space-between;
 }
 
+// Text utilities
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-gradient($color1, $color2) {
+  background: linear-gradient(135deg, $color1, $color2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 // Loading animation
 @mixin loading-spinner {
   display: inline-block;
@@ -184,22 +168,6 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-// Text utilities
-@mixin text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@mixin text-gradient($color1, $color2) {
-  background: linear-gradient(135deg, $color1, $color2);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
 
 // Accessibility
@@ -220,5 +188,36 @@
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
+  }
+}
+
+// Responsive breakpoints (keep existing)
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1}) { @content; }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1}) { @content; }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-lg) { @content; }
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+  @if $breakpoint == 2xl {
+    @media (min-width: $breakpoint-2xl) { @content; }
   }
 }

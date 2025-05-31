@@ -13,20 +13,40 @@
 .header {
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
-  border-radius: var(--border-radius-lg);
-  color: var(--color-accent-light);
-  border: 2px solid var(--color-accent);
-  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, $primary-dark, $primary-color);
+  border-radius: $border-radius-lg;
+  color: $accent-light;
+  border: 2px solid $accent-color;
+  box-shadow: $shadow-lg;
+  position: relative;
+  overflow: hidden;
+  
+  // Add subtle pattern overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba($accent-color, 0.1) 50%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
 .title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   margin: 0;
-  font-family: var(--font-family-heading);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--color-accent-light);
+  font-family: $font-family-heading;
+  text-shadow: 2px 2px 4px rgba($black, 0.3);
+  color: $accent-light;
+  position: relative;
+  z-index: 1;
+  
+  @include mobile {
+    font-size: 2rem;
+  }
 }
 
 .subtitle {
@@ -34,7 +54,13 @@
   opacity: 0.9;
   margin: 0;
   font-style: italic;
-  color: var(--color-accent-light);
+  color: $accent-light;
+  position: relative;
+  z-index: 1;
+  
+  @include mobile {
+    font-size: 1rem;
+  }
 }
 
 .summary {
@@ -49,34 +75,74 @@
 }
 
 .primaryMetric {
-  background: var(--color-surface);
+  background: $white;
   padding: 2rem;
-  border-radius: var(--border-radius-lg);
+  border-radius: $border-radius-lg;
   text-align: center;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--color-primary-light);
-  transition: transform 0.2s ease;
+  box-shadow: $shadow-lg;
+  border: 2px solid $primary-light;
+  transition: all $transition-base;
+  position: relative;
+  overflow: visible; // Changed from hidden to visible
+  min-height: 160px; // Ensure minimum height
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   
   &:hover {
     transform: translateY(-2px);
+    box-shadow: $shadow-xl;
+    border-color: $primary-color;
+  }
+  
+  // Add subtle gradient background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba($primary-color, 0.05));
+    pointer-events: none;
   }
 }
 
 .metricValue {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: var(--color-primary-dark);
-  line-height: 1;
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  font-weight: $font-weight-bold;
+  color: $primary-dark;
+  line-height: 1.1;
   margin-bottom: 0.5rem;
-  font-family: var(--font-family-heading);
+  font-family: $font-family-heading;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap; // Keep number on one line
+  overflow: visible;
+  padding: 0 1rem; // More padding for margins
+  width: 100%;
+  text-overflow: clip; // Don't add ellipsis
+  
+  @include mobile {
+    font-size: clamp(1.2rem, 5vw, 2.2rem); // Even smaller range for mobile
+    padding: 0 0.75rem;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
 }
 
 .metricLabel {
   font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-weight: $font-weight-semibold;
+  color: $dark-gray;
   margin-bottom: 0.25rem;
-  font-family: var(--font-family-heading);
+  font-family: $font-family-heading;
+  position: relative;
+  z-index: 1;
+  
+  @include mobile {
+    font-size: 1.1rem;
+  }
 }
 
 .statsGrid {
@@ -86,43 +152,62 @@
 }
 
 .statCard {
-  background: var(--color-surface);
+  background: $white;
   padding: 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: $border-radius-md;
   text-align: center;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
-  transition: transform 0.2s ease;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba($gray, 0.3);
+  transition: all $transition-base;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    background: var(--color-primary-light);
-    color: green;
+    box-shadow: $shadow-lg;
+    background: $primary-light;
+    color: $white;
+    border-color: $primary-color;
+    
+    .statValue {
+      color: $white;
+    }
+    
+    .statLabel {
+      color: rgba($white, 0.9);
+    }
+  }
+  
+  @include mobile {
+    padding: 1rem;
   }
 }
 
 .statValue {
   font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-weight: $font-weight-bold;
+  color: $primary-color;
   margin-bottom: 0.5rem;
-  font-family: var(--font-family-heading);
+  font-family: $font-family-heading;
+  transition: color $transition-base;
+  
+  @include mobile {
+    font-size: 1.5rem;
+  }
 }
 
 .statLabel {
   font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  font-weight: 500;
+  color: $gray;
+  font-weight: $font-weight-medium;
   font-style: italic;
+  transition: color $transition-base;
 }
 
 .detailsSection {
-  background: var(--color-surface);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-md);
+  background: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba($gray, 0.3);
 }
 
 .detailsHeader {
@@ -130,98 +215,151 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  background: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
-  color: var(--color-accent-light);
+  background: linear-gradient(to right, $primary-light, $primary-color);
+  color: $white;
+  
+  @include mobile {
+    padding: 1rem;
+  }
 }
 
 .detailsTitle {
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-family-heading);
+  font-family: $font-family-heading;
+  
+  @include mobile {
+    font-size: 1.1rem;
+  }
 }
 
 .tableContainer {
   padding: 1.5rem;
   overflow-x: auto;
+  
+  @include mobile {
+    padding: 1rem;
+  }
 }
 
 .resultsTable {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border: 1px solid var(--color-border);
+  background: $white;
+  border: 1px solid rgba($gray, 0.3);
+  border-radius: $border-radius-md;
+  overflow: hidden;
   
   th {
-    background: var(--color-primary-light);
-    color: black;
+    background: $primary-light;
+    color: $white;
     padding: 1rem;
     text-align: center;
-    font-weight: 600;
-    font-family: var(--font-family-heading);
-    border-bottom: 2px solid var(--color-primary);
+    font-weight: $font-weight-semibold;
+    font-family: $font-family-heading;
+    border-bottom: 2px solid $primary-color;
+    font-size: 0.9rem;
+    
+    @include mobile {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.8rem;
+    }
   }
   
   td {
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--color-border-light);
+    border-bottom: 1px solid rgba($gray, 0.2);
     font-size: 0.9rem;
+    
+    @include mobile {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
   }
 }
 
 .tableRow {
-  transition: background-color 0.2s ease;
+  transition: all $transition-fast;
   
   &:hover {
-    background: var(--color-primary-light);
-    color: black;
+    background: lighten($primary-color, 45%);
+    
+    .indexCell {
+      color: $primary-dark;
+      font-weight: $font-weight-bold;
+    }
   }
   
   &:last-child td {
     border-bottom: none;
   }
+  
+  &:nth-child(even) {
+    background: rgba($primary-color, 0.02);
+  }
 }
 
 .indexCell {
-  font-weight: 600;
-  color: var(--color-primary);
+  font-weight: $font-weight-semibold;
+  color: $primary-color;
   text-align: center;
   width: 80px;
+  transition: all $transition-fast;
 }
 
 .locationCell {
-  font-family: var(--font-family-mono);
-  font-weight: 500;
+  font-family: $font-family-mono;
+  font-weight: $font-weight-medium;
   text-align: center;
   width: 120px;
+  color: $dark-gray;
 }
 
 .distanceCell {
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   text-align: center;
   width: 100px;
-  color: var(--color-text);
+  color: $secondary-color;
 }
 
 .actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-top: $spacing-lg;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 .resetButton {
   @include button-primary;
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  font-family: var(--font-family-heading);
-  border: 2px solid var(--color-accent);
+  font-family: $font-family-heading;
+  border: 2px solid $accent-color;
+  position: relative;
+  overflow: hidden;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: $shadow-lg;
+    border-color: $accent-dark;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @include mobile {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
   }
 }
 
@@ -229,19 +367,74 @@
   display: flex;
   justify-content: center;
   padding: 1rem;
-  border-top: 1px solid var(--color-border);
-  background: var(--color-surface);
+  border-top: 1px solid rgba($gray, 0.3);
+  background: rgba($primary-color, 0.02);
 }
 
 .showMoreButton {
   @include button-secondary;
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
-  border-radius: var(--border-radius-full);
-  transition: all 0.2s ease;
+  border-radius: $border-radius-full;
+  transition: all $transition-base;
+  font-weight: $font-weight-medium;
   
   &:hover {
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    box-shadow: $shadow-md;
+    background: $primary-color;
+    color: $white;
+    border-color: $primary-color;
+  }
+  
+  @include mobile {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+// Additional utility classes for enhanced visual hierarchy
+.metric-highlight {
+  background: linear-gradient(135deg, $accent-light, $accent-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table-highlight {
+  background: linear-gradient(90deg, transparent, rgba($primary-color, 0.1), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+// Print styles
+@media print {
+  .container {
+    max-width: none;
+    padding: 0;
+    gap: 1rem;
+  }
+  
+  .header {
+    background: $white !important;
+    color: $black !important;
+    border: 2px solid $gray;
+    box-shadow: none;
+  }
+  
+  .title, .subtitle {
+    color: $black !important;
+  }
+  
+  .actions {
+    display: none;
+  }
+  
+  .showMoreContainer {
+    display: none;
   }
 }

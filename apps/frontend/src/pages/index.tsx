@@ -24,6 +24,8 @@ interface ProcessingResult {
 export default function Home() {
   const [results, setResults] = useState<ProcessingResult | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [globalError, setGlobalError] = useState<string | null>(null);
+
 
   // Health check query
   const healthQuery = trpc.health.useQuery(undefined, {
@@ -35,16 +37,25 @@ export default function Home() {
   const handleResults = (processingResults: ProcessingResult) => {
     setResults(processingResults);
     setIsProcessing(false);
+    setGlobalError(null); 
   };
 
   const handleReset = () => {
     setResults(null);
     setIsProcessing(false);
+    setGlobalError(null); 
   };
 
   const handleStartProcessing = () => {
     setIsProcessing(true);
+    setGlobalError(null); 
   };
+
+  const handleError = (error: string) => {
+    setIsProcessing(false); 
+    setGlobalError(error);   
+    setResults(null);        
+};
 
   return (
     <>
@@ -65,9 +76,15 @@ export default function Home() {
         <div className={styles.content}>
           {!results && !isProcessing && (
             <div className={styles.uploadSection}>
+              {globalError && (               
+                <div className={styles.error}>
+                  <strong>Error:</strong> {globalError}
+                </div>
+              )}
               <FileUpload 
                 onResults={handleResults}
                 onStartProcessing={handleStartProcessing}
+                onError={handleError}
               />
             </div>
           )}

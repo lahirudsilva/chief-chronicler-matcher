@@ -15,12 +15,12 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: $primary-color;
   margin-bottom: 0.5rem;
 }
 
 .description {
-  color: var(--color-text-secondary);
+  color: $gray;
   font-size: 1.1rem;
 }
 
@@ -31,21 +31,22 @@
 }
 
 .dropzone {
-  border: 2px dashed var(--color-border);
-  border-radius: var(--border-radius-lg);
+  border: 2px dashed rgba($gray, 0.4);
+  border-radius: $border-radius-lg;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all $transition-base;
   position: relative;
+  background: $white;
   
   &:hover, &.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary-light);
-    color: white;
+    border-color: $primary-color;
+    background: $primary-light;
+    color: $white;
     
     h3, p {
-      color: white;
+      color: $white;
     }
   }
 }
@@ -58,19 +59,22 @@
   
   h3 {
     margin: 0;
-    color: var(--color-text);
-    transition: color 0.3s ease;
+    color: $dark-gray;
+    transition: color $transition-base;
+    font-family: $font-family-heading;
   }
   
   p {
     margin: 0;
-    color: var(--color-text-secondary);
-    transition: color 0.3s ease;
+    color: $gray;
+    transition: color $transition-base;
   }
 }
 
 .icon {
   font-size: 2.5rem;
+  color: $primary-color;
+  transition: color $transition-base;
 }
 
 .fileInput {
@@ -89,28 +93,39 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: var(--color-surface);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--color-border);
+  background: $white;
+  border-radius: $border-radius-md;
+  border: 1px solid rgba($gray, 0.3);
+  box-shadow: $shadow-sm;
 }
 
 .fileName {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-text);
+  color: $dark-gray;
+  font-family: $font-family-mono;
+  font-size: 0.9rem;
 }
 
 .removeFile {
   background: none;
   border: none;
-  color: var(--color-error);
+  color: $error-color;
   cursor: pointer;
   padding: 0.25rem;
   font-size: 1.2rem;
+  border-radius: $border-radius-sm;
+  transition: all $transition-fast;
   
   &:hover {
-    color: var(--color-error-dark);
+    color: darken($error-color, 15%);
+    background: lighten($error-color, 45%);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($error-color, 0.2);
   }
 }
 
@@ -118,17 +133,21 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: var(--color-text-secondary);
+  color: $gray;
+  margin: $spacing-lg 0;
   
   &::before,
   &::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba($gray, 0.3);
   }
   
   span {
     padding: 0 1rem;
+    background: $bg-primary;
+    font-size: 0.9rem;
+    font-weight: $font-weight-medium;
   }
 }
 
@@ -139,20 +158,35 @@
 }
 
 .label {
-  font-weight: 500;
-  color: var(--color-text);
+  font-weight: $font-weight-medium;
+  color: $dark-gray;
+  font-family: $font-family-heading;
 }
 
 .textarea {
   @include input-base;
   resize: vertical;
   min-height: 150px;
+  font-family: $font-family-mono;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  
+  &::placeholder {
+    color: $gray;
+    font-family: $font-family-primary;
+  }
+  
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
 }
 
 .actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-top: $spacing-lg;
   
   @include mobile {
     flex-direction: column;
@@ -162,6 +196,13 @@
 .exampleButton {
   @include button-secondary;
   flex: 1;
+  font-family: $font-family-heading;
+  
+  &:hover {
+    background: $primary-color;
+    color: $white;
+    border-color: $primary-color;
+  }
 }
 
 .submitButton {
@@ -171,14 +212,25 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-family: $font-family-heading;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+      box-shadow: $shadow-sm;
+    }
+  }
 }
 
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba($white, 0.3);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color: $white;
   animation: spin 1s linear infinite;
 }
 
@@ -189,12 +241,72 @@
 .error {
   margin-top: 1rem;
   padding: 1rem;
-  background: var(--color-error-light);
-  border: 1px solid var(--color-error);
-  border-radius: var(--border-radius);
-  color: var(--color-error-dark);
+  background: lighten($error-color, 45%);
+  border: 1px solid $error-color;
+  border-radius: $border-radius-md;
+  color: darken($error-color, 20%);
   
   strong {
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// Success state for file upload
+.success {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: lighten($success-color, 45%);
+  border: 1px solid $success-color;
+  border-radius: $border-radius-md;
+  color: darken($success-color, 20%);
+  
+  strong {
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// Responsive adjustments
+@include tablet {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .dropzone {
+    padding: 1.5rem;
+  }
+}
+
+@include mobile {
+  .container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+  
+  .dropzone {
+    padding: 1.25rem;
+  }
+  
+  .icon {
+    font-size: 2rem;
+  }
+  
+  .fileInfo {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .fileName {
+    font-size: 0.8rem;
+  }
+  
+  .textarea {
+    min-height: 120px;
+    font-size: 0.85rem;
   }
 }

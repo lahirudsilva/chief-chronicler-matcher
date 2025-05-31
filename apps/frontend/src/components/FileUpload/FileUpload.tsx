@@ -5,9 +5,10 @@ import styles from './FileUpload.module.scss';
 interface FileUploadProps {
   onResults: (results: any) => void;
   onStartProcessing?: () => void;
+  onError?: (error: string) => void;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onResults, onStartProcessing }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ onResults, onStartProcessing, onError }) => {
   const [inputData, setInputData] = useState('');
   const [dragActive, setDragActive] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -20,7 +21,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onResults, onStartProcessing })
       setError(null);
     },
     onError: (error) => {
+      onResults(null);
       setError(error.message);
+      onError?.(error.message); 
     },
   });
 
